@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div id="test">Empty div</div>
+        <button id="saludame">Boton!</button>
+
+        <table id="laTabla">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>userId</th>
+                    <th>title</th>
+                    <th>body</th>
+                </tr>
+            </thead>
+        </table>
+
+        <script type="text/javascript">
+            $('#saludame').click(function () {
+                var root = 'https://jsonplaceholder.typicode.com';
+
+                $.ajax({
+                    url: root + '/posts',
+                    method: 'GET'
+                }).then(function (data) {
+                    $.each(data, function (i, member) {
+                        var $tr = $('<tr>').append(
+                                $('<td>').text(member.id),
+                                $('<td>').text(member.userId),
+                                $('<td>').text(member.title),
+                                $('<td>').text(member.body)
+                                ).appendTo('#laTabla');
+                    });
+                });
+            });
+            $('#test').hover(function () {
+                $(this).html("Ahora no estoy mas vacio");
+            }, function () {
+                $(this).html("Wesa wepa wo");
+            });
+        </script>
+    </body>
+</html>
